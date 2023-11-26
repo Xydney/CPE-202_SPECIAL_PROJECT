@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Admin Panel - Active Bookings</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Room Name</th>
+                    <th>Details</th>
+                    <th>Price per Day</th>
+                    <th>No. of Days</th>
+                    <th>Fee</th>
+                    <th>Owner</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in rooms %}
+                        <tr>
+                            <td>{{ room.room_number }}</td>
+                            <td>{{ room.room_name }}</td>
+                            <td>{{ room.details }}</td>
+                            <td>{{ room.price_per_night }}</td>
+                            <td>{{ room.calculate_nights }}</td>
+                            <td>{{ room.calculate_fee }}</td>
+                            <td>{{ room.owner }}</td>
+                            <td>
+                                <form method="post" action="{% url 'approve_payment' room.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-info btn-sm">Approve Payment</button>
+                                </form>
+                            </td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block title %}
+  Admin Panel - Active Bookings
+{% endblock %}

@@ -1,0 +1,76 @@
+
+
+{% block content %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Additional custom styles */
+    body {
+      font-family: 'SF Pro', 'Segoe UI', 'Roboto', sans-serif; /* Apple-like font */
+      background-color: #000; /* Black background */
+      margin: 0;
+      padding: 0;
+    }
+    .hero-section {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://stories.forbestravelguide.com/wp-content/uploads/2020/06/HERO-CovidHotels-ThePostOakHotelAtUptownHouston-FrontEntrance-CreditFertittaEntertainment-1200x671.jpg');
+      background-size: cover;
+      opacity: 0.7; /* Image opacity */
+      filter: blur(2px); /* Optional: Apply a slight blur effect */
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: #fff;
+    }
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+    }
+    .hero-content a {
+      font-size: 1.5rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for readability */
+    }
+  </style>
+  <div class="hero-section">
+    <div class="hero-background"></div>
+    <div class="hero-content">
+      <h1>Welcome to Our Hotel</h1>
+      <p>Discover the perfect stay for your next trip!</p>
+      <a href="/available-rooms" class="btn btn-primary">Book Now</a>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // Add animations (e.g., fade in) using JavaScript or jQuery here
+    $(document).ready(function() {
+      $('.hero-section').fadeIn(1500); // Example: Fade in animation
+    });
+  </script>
+{% endblock %}

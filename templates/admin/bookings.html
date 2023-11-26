@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Admin Panel - Bookings</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Room</th>
+                    <th>Check-in date</th>
+                    <th>Check-out date</th>
+                    <th>Booking Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    {% if booking.room.is_available %}
+                        <tr>
+                            <td>{{ booking.user }}</td>
+                            <td>{{ booking.room }}</td>
+                            <td>{{ booking.check_in_date }}</td>
+                            <td>{{ booking.check_out_date }}</td>
+                            <td>{{ booking.booking_date }}</td>
+                            <td>
+                                <form method="post" action="{% url 'approve_booking' booking.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-info btn-sm">Approve</button>
+                                </form>
+                                <form method="post" action="{% url 'decline_booking' booking.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Decline</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block title %}
+  Admin Panel - Bookings
+{% endblock %}

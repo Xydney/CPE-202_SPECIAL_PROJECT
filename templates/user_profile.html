@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h1>User Profile - Active Bookings</h1>
+    <div class="row mt-4">
+        {% if user_bookings %}
+            {% for booking in user_bookings %}
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{ booking.room_img.url }}" class="card-img-top img-fluid" alt="Room Image" style="width: 200px; height: 200px; overflow: hidden; object-fit: cover; width: 100%;">
+<br></br>
+                            <h5 class="card-title">Room: {{ booking.room_name }}</h5>
+                            <p class="card-text">Check-in Date: {{ booking.check_in_date }}</p>
+                            <p class="card-text">Check-out Date: {{ booking.check_out_date }}</p>
+                            <!-- Add more details if needed -->
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No active bookings found.</p>
+        {% endif %}
+  
+    
+
+    <div class="container mt-4">
+        <h1>User Profile - Pending Bookings</h1>
+        <div class="row mt-4">
+            {% if pending_bookings %}
+                {% for booking in pending_bookings %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="{{ booking.room.room_img.url }}" class="card-img-top img-fluid" alt="Room Image" style="width: 200px; height: 200px; overflow: hidden; object-fit: cover; width: 100%;">
+    <br></br>
+                                <h5 class="card-title">Room: {{ booking.room_name }}</h5>
+                                <p class="card-text">Check-in Date: {{ booking.check_in_date }}</p>
+                                <p class="card-text">Check-out Date: {{ booking.check_out_date }}</p>
+                                <a href="{% url 'cancel_booking' booking.id %}" class="btn btn-danger">Cancel Booking</a>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No active bookings found.</p>
+            {% endif %}
+        </div>
+    <!-- User Details -->
+    <div class="mt-5">
+        <h2>User Details</h2>
+        <ul class="list-group">
+            <li class="list-group-item">Email: {{ request.user.email }}</li>
+            <li class="list-group-item">First Name: {{ request.user.first_name }}</li>
+            <li class="list-group-item">Last Name: {{ request.user.last_name }}</li>
+            <li class="list-group-item">Username: {{ request.user.username }}</li>
+            <!-- Add more user details here -->
+        </ul>
+
+        <!-- Edit Details Button -->
+        <a href="{% url 'edit_user_details' request.user.pk %}" class="btn btn-primary mt-3">Edit Details</a>
+    </div>
+</div>
+</div>
+<!-- Include Bootstrap JS (if needed) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

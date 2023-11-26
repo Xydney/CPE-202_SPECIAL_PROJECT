@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Admin Panel - Rooms</h2>  <a href="/createroom">Create Room</a>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Room Name</th>
+                    <th>Details</th>
+                    <th>Price per Night</th>
+                    <th>Availability</th>
+                    <th>Owner</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in rooms %}
+                        <tr>
+                            <td>{{ room.room_number }}</td>
+                            <td>{{ room.room_name }}</td>
+                            <td>{{ room.details }}</td>
+                            <td>{{ room.price_per_night }}</td>
+                            <td>{{ room.calculate_fee }}</td>
+                            <td>{{ room.owner }}</td>
+                            <td>
+                                <form method="post" action="{% url 'edit_room' room.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-info btn-sm">Edit</button>
+                                </form>
+                                <form method="post" action="{% url 'delete_room' room.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block title %}
+  Admin Panel - Rooms
+{% endblock %}

@@ -1,0 +1,27 @@
+<!-- room_detail.html -->
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <img src="{{ room.room_img.url }}" class="card-img-top" alt="Room Image" style="width: 1000x; height: 600px; object-fit: cover;">
+    <div class="card-body">
+        <h5 class="card-title">{{ room.room_name }}</h5>
+        <p class="card-text">{{ room.details }}</p>
+        <p class="card-text">Price per Night: ${{ room.price_per_night }}</p>
+
+        
+        <!-- Booking Form -->
+        <form method="post" action="{% url 'book_room' room.id %}" class="my-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="check-in">Check-in Date:</label>
+                <input type="date" id="check-in" name="check_in_date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="check-out">Check-out Date:</label>
+                <input type="date" id="check-out" name="check_out_date" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Book Now</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

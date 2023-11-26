@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Available Rooms</h1>
+    <div class="row row-cols-1 row-cols-md-3 mt-4">
+        {% if available_rooms %}
+            {% for room in available_rooms %}
+                <div class="col mb-4">
+                    <div class="card h-100">
+                        <div style="height: 400px; overflow: hidden;">
+                            <img src="{{ room.room_img.url }}" class="card-img-top img-fluid" alt="Room Image" style="object-fit: cover; width: 100%;">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ room.room_name }}</h5>
+                            <p class="card-text">Room Number: {{ room.room_number }}</p>
+                            <p class="card-text">Price per Night: ${{ room.price_per_night }}</p>
+                            <p class="card-text">{{ room.details }}</p>
+                            <a href="{% url 'room_detail' room.id %}" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No available rooms at the moment.</p>
+        {% endif %}
+    </div>
+</div>
+<!-- Include Bootstrap JS (if needed) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block title %}
+Available Rooms
+{% endblock %}
